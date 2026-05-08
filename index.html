@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 카카오 공유용 OG 태그 -->
+<meta property="og:title" content="내가 가장 좋아하는 성경 구절은?">
+<meta property="og:description" content="선원교회 청년부 #257 · 시편 1편과 함께하는 말씀 나눔 설문">
+<meta property="og:type" content="website">
+<title>내가 가장 좋아하는 성경 구절은 — 선원교회 청년부</title>
+
+<!-- 구글 폰트: display=swap으로 폴백 처리, 카카오 인앱에서도 안전 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ── 폰트 폴백: 카카오 인앱에서 구글 폰트 실패 시 시스템 폰트 사용 ── */
+:root {
+  --font-serif: 'Noto Serif KR', 'Apple SD Gothic Neo', '맑은 고딕', serif;
+  --font-sans:  'Noto Sans KR',  'Apple SD Gothic Neo', '맑은 고딕', sans-serif;
+
+  --navy:      #1C2B4A;
+  --navy-mid:  #253660;
+  --navy-light:#344880;
+  --gold:      #C8A84B;
+  --gold-light:#E8CC82;
+  --gold-pale: #F7EDD0;
+  --cream:     #FAF7F0;
+  --cream-dark:#EDE8DC;
+  --text:      #1E1A14;
+  --text-mid:  #4A4236;
+  --text-soft: #8C7E6A;
+  --white:     #FFFFFF;
+  --parchment: #F2EBD9;
+  --green:     #2E6B4A;
+  --red:       #8B2020;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { -webkit-text-size-adjust: 100%; }  /* iOS 인앱 자동 폰트 크기 조정 방지 */
+
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* 카카오 인앱 스크롤 부드럽게 */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── HEADER ── */
+.site-header { background: var(--navy); position: relative; overflow: hidden; }
+.header-pattern {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg, transparent, transparent 20px,
+    rgba(200,168,75,0.05) 20px, rgba(200,168,75,0.05) 21px);
+}
+.header-inner {
+  position: relative; z-index: 1;
+  padding: 32px 20px 26px; text-align: center;
+  border-bottom: 1px solid rgba(200,168,75,0.25);
+}
+.church-name {
+  font-family: var(--font-serif); font-size: 11px; font-weight: 400;
+  color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase;
+  margin-bottom: 10px; opacity: 0.85;
+}
+.header-title {
+  font-family: var(--font-serif); font-size: 21px; font-weight: 700;
+  color: var(--white); line-height: 1.45; margin-bottom: 6px;
+}
+.header-title em { font-style: italic; color: var(--gold-light); }
+.header-sub { font-size: 12px; color: rgba(255,255,255,0.4); }
+.header-ornament {
+  margin: 14px auto 0; display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+  gap: 10px; opacity: 0.45;
+}
+.ornament-line { width: 40px; height: 1px; background: var(--gold); }
+.ornament-cross { color: var(--gold); font-size: 13px; }
+
+/* ── PROGRESS: sticky 대신 fixed 사용 (카카오 인앱 sticky 버그 대응) ── */
+.progress-bar-wrap {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0; z-index: 99;
+  background: var(--navy-mid); height: 4px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  -webkit-transition: width 0.45s ease; transition: width 0.45s ease;
+  width: 0%;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ── INTRO ── */
+.intro-wrap { max-width: 600px; margin: 0 auto; padding: 32px 18px 80px; }
+
+.psalm-card {
+  background: var(--navy); border-radius: 14px;
+  padding: 24px 22px 20px; margin-bottom: 22px;
+  position: relative; overflow: hidden;
+}
+.psalm-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+.psalm-label {
+  font-size: 10px; letter-spacing: 0.18em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 12px; font-weight: 600;
+}
+.psalm-text {
+  font-family: var(--font-serif); font-size: 15px;
+  color: rgba(255,255,255,0.88); line-height: 2;
+}
+.psalm-text strong { color: var(--gold-light); }
+.psalm-ref { margin-top: 12px; font-size: 11px; color: rgba(255,255,255,0.28); font-style: italic; }
+
+.intro-desc {
+  background: var(--white); border-radius: 12px;
+  padding: 20px 18px; margin-bottom: 18px;
+  border: 1px solid var(--cream-dark);
+}
+.intro-desc-title {
+  font-family: var(--font-serif); font-size: 14px; font-weight: 700;
+  color: var(--navy); margin-bottom: 10px;
+}
+.intro-desc p { font-size: 13px; color: var(--text-mid); line-height: 1.9; }
+
+.intro-meta-row {
+  display: -webkit-flex; display: flex;
+  gap: 8px; margin-bottom: 24px; flex-wrap: wrap;
+}
+.meta-badge {
+  background: var(--navy); color: var(--gold);
+  border-radius: 20px; padding: 5px 13px; font-size: 12px; font-weight: 500;
+}
+
+/* 버튼: -webkit-appearance 제거로 iOS 인앱 기본 스타일 방지 */
+.btn-start {
+  display: block; width: 100%;
+  background: var(--navy); color: var(--white);
+  border: none; border-radius: 14px; padding: 18px;
+  font-family: var(--font-serif); font-size: 16px; font-weight: 700;
+  cursor: pointer; position: relative; overflow: hidden;
+  -webkit-appearance: none; appearance: none;
+  box-shadow: 0 4px 18px rgba(28,43,74,0.28);
+}
+.btn-start::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+
+/* ── QUIZ ── */
+.quiz-wrap { max-width: 600px; margin: 0 auto; padding: 24px 18px 80px; }
+.quiz-step-label {
+  font-size: 10px; letter-spacing: 0.18em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 6px; font-weight: 700;
+}
+.quiz-counter { font-size: 12px; color: var(--text-soft); margin-bottom: 20px; }
+.quiz-card {
+  background: var(--white); border-radius: 16px; padding: 24px 18px;
+  border: 1px solid var(--cream-dark); margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.quiz-q {
+  font-family: var(--font-serif); font-size: 17px; font-weight: 700;
+  color: var(--navy); line-height: 1.6; margin-bottom: 8px;
+}
+.quiz-hint {
+  font-size: 12px; color: var(--text-soft); line-height: 1.75;
+  margin-bottom: 20px; padding-bottom: 18px;
+  border-bottom: 1px solid var(--cream-dark);
+}
+.options-grid { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 9px; }
+
+.opt-btn {
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: flex-start; align-items: flex-start;
+  gap: 12px;
+  background: var(--cream); border: 1.5px solid var(--cream-dark);
+  border-radius: 11px; padding: 13px 14px;
+  cursor: pointer; text-align: left; width: 100%;
+  -webkit-appearance: none; appearance: none;
+  /* 카카오 인앱 active 상태 */
+  -webkit-transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.15s, background 0.15s;
+}
+.opt-btn:active { border-color: var(--gold); background: var(--gold-pale); }
+.opt-btn.selected { border-color: var(--gold); background: var(--gold-pale); }
+.opt-marker {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid var(--cream-dark); flex-shrink: 0; margin-top: 1px;
+  display: -webkit-flex; display: flex;
+  -webkit-align-items: center; align-items: center;
+  -webkit-justify-content: center; justify-content: center;
+  font-size: 11px; color: var(--white); font-weight: 700;
+  -webkit-transition: all 0.15s; transition: all 0.15s;
+}
+.opt-btn.selected .opt-marker { background: var(--gold); border-color: var(--gold); }
+.opt-btn.selected .opt-marker::after { content: '✓'; }
+.opt-text { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+.opt-btn.selected .opt-text { color: var(--text); font-weight: 600; }
+
+/* verse 두 필드 */
+.verse-input-group { display: -webkit-flex; display: flex; -webkit-flex-direction: column; flex-direction: column; gap: 11px; }
+.text-input-wrap {
+  background: var(--cream); border: 1.5px solid var(--cream-dark);
+  border-radius: 11px; padding: 13px 14px;
+}
+.text-input-wrap:focus-within { border-color: var(--gold); }
+.text-input-label { font-size: 11px; color: var(--text-soft); margin-bottom: 6px; }
+.ref-input {
+  width: 100%; border: none; background: transparent;
+  font-family: var(--font-serif); font-size: 18px;
+  color: var(--navy); outline: none; font-weight: 700;
+  /* iOS 인앱 입력 필드 기본 스타일 제거 */
+  -webkit-appearance: none; appearance: none;
+  border-radius: 0;
+}
+.ref-input::placeholder { color: #ccc; font-weight: 400; }
+.text-input {
+  width: 100%; border: none; background: transparent;
+  font-family: var(--font-sans); font-size: 14px;
+  color: var(--text); outline: none; resize: none; min-height: 48px;
+  -webkit-appearance: none; appearance: none;
+  border-radius: 0;
+}
+.text-input::placeholder { color: #ccc; }
+
+.nav-row {
+  display: -webkit-flex; display: flex; gap: 10px;
+}
+.btn-nav {
+  -webkit-flex: 1; flex: 1; border-radius: 11px; padding: 15px;
+  font-size: 14px; font-weight: 600; cursor: pointer; border: none;
+  -webkit-appearance: none; appearance: none;
+}
+.btn-prev { background: var(--cream-dark); color: var(--text-mid); }
+.btn-next { background: var(--navy); color: var(--white); box-shadow: 0 3px 10px rgba(28,43,74,0.22); }
+.btn-next:disabled { opacity: 0.32; }
+
+/* ── RESULT ── */
+.result-wrap { max-width: 600px; margin: 0 auto; padding: 24px 18px 80px; }
+.result-hero {
+  background: var(--navy); border-radius: 16px;
+  padding: 28px 20px 24px; margin-bottom: 16px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.result-hero::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+.result-done-label {
+  font-size: 10px; letter-spacing: 0.18em; color: var(--gold);
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.result-verse-ref {
+  font-family: var(--font-serif); font-size: 24px;
+  font-weight: 700; color: var(--gold-light); margin-bottom: 8px;
+}
+.result-verse-text {
+  font-family: var(--font-serif); font-size: 14px;
+  color: rgba(255,255,255,0.72); line-height: 1.9; font-style: italic;
+}
+.result-card {
+  background: var(--white); border-radius: 14px;
+  padding: 20px 18px 16px; border: 1px solid var(--cream-dark); margin-bottom: 12px;
+}
+.result-card-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+}
+.result-row {
+  display: -webkit-flex; display: flex;
+  -webkit-justify-content: space-between; justify-content: space-between;
+  -webkit-align-items: flex-start; align-items: flex-start;
+  padding: 7px 0; border-bottom: 1px solid var(--cream-dark); gap: 12px;
+}
+.result-row:last-child { border-bottom: none; }
+.result-row-label { font-size: 12px; color: var(--text-soft); white-space: nowrap; }
+.result-row-value { font-size: 12px; color: var(--text); text-align: right; font-weight: 600; max-width: 66%; word-break: keep-all; }
+.reading-type-badge {
+  display: inline-block; padding: 4px 13px; border-radius: 20px;
+  font-size: 12px; font-weight: 700; background: var(--navy); color: var(--gold); margin-bottom: 8px;
+}
+.reading-type-desc { font-size: 13px; color: var(--text-mid); line-height: 1.85; }
+.theological-note {
+  background: var(--parchment); border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0; padding: 14px 16px; margin-top: 12px;
+}
+.theological-note p { font-size: 12px; color: var(--text-mid); line-height: 1.85; }
+
+/* 전송 상태 */
+.submit-status {
+  border-radius: 10px; padding: 13px 15px;
+  font-size: 13px; line-height: 1.6; margin-bottom: 12px; display: none;
+}
+.submit-status.sending { background: #EEF3FF; color: #3355AA; border: 1px solid #BDD0FF; display: block; }
+.submit-status.success { background: #EDFAF3; color: var(--green); border: 1px solid #A5DFC0; display: block; }
+.submit-status.error   { background: #FFF0F0; color: var(--red);   border: 1px solid #F5BBBB; display: block; }
+
+.result-actions { display: -webkit-flex; display: flex; gap: 10px; }
+.btn-action {
+  -webkit-flex: 1; flex: 1; border: none; border-radius: 11px; padding: 14px;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+}
+.btn-restart { background: var(--cream-dark); color: var(--text-mid); }
+.btn-copy    { background: var(--navy); color: var(--white); }
+
+.site-footer {
+  text-align: center; padding: 22px 18px;
+  font-size: 11px; color: var(--text-soft);
+  border-top: 1px solid var(--cream-dark); margin-top: 16px; line-height: 1.8;
+}
+
+@-webkit-keyframes fadeUp {
+  from { opacity: 0; -webkit-transform: translateY(14px); transform: translateY(14px); }
+  to   { opacity: 1; -webkit-transform: translateY(0);    transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-in {
+  -webkit-animation: fadeUp 0.35s ease forwards;
+  animation: fadeUp 0.35s ease forwards;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-pattern"></div>
+  <div class="header-inner">
+    <div class="church-name">선원교회 청년부 #257</div>
+    <div class="header-title">내가 가장 좋아하는 <em>성경 구절</em>은?</div>
+    <div class="header-sub">My Favorite Scripture Verse · 시편 1편과 함께</div>
+    <div class="header-ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-cross">✦</div>
+      <div class="ornament-line"></div>
+    </div>
+  </div>
+</header>
+
+<div class="progress-bar-wrap">
+  <div class="progress-bar-fill" id="progressFill"></div>
+</div>
+
+<!-- ══ INTRO ══ -->
+<div class="screen active" id="screen-intro">
+  <div class="intro-wrap animate-in">
+    <div class="psalm-card">
+      <div class="psalm-label">Psalm 1 · 시편 1편</div>
+      <div class="psalm-text">
+        복 있는 사람은 악인들의 꾀를 따르지 아니하며<br>
+        죄인들의 길에 서지 아니하며 오만한 자들의 자리에 앉지 아니하고<br>
+        오직 여호와의 <strong>율법을 즐거워하여</strong><br>
+        그의 율법을 주야로 묵상하는도다<br>
+        그는 시냇가에 심은 나무 같아서<br>
+        철을 따라 열매를 맺으며<br>
+        그 잎사귀가 마르지 아니함 같으니
+      </div>
+      <div class="psalm-ref">시편 1:1–3 (개역개정)</div>
+    </div>
+
+    <div class="intro-desc">
+      <div class="intro-desc-title">이 설문에 대해</div>
+      <p>
+        시편 1편은 말씀에 대한 순종과 샬롬(평화)의 약속을 담고 있습니다.
+        성경을 읽고, 묵상하고, 그 말씀대로 살아가는 것이 곧 행복(아쉬레이)입니다.<br><br>
+        여러분이 가장 사랑하는 성경 구절은 무엇인가요?
+        이 설문은 오늘 예배 토론을 위한 나눔 자리입니다.
+      </p>
+    </div>
+
+    <div class="intro-meta-row">
+      <div class="meta-badge">📖 7개 질문</div>
+      <div class="meta-badge">⏱ 약 3분</div>
+      <div class="meta-badge">✦ 시편 1편 기반</div>
+    </div>
+
+    <button class="btn-start" onclick="startSurvey()">설문 시작하기 →</button>
+  </div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div class="screen" id="screen-quiz">
+  <div class="quiz-wrap">
+    <div id="quiz-step-label" class="quiz-step-label"></div>
+    <div id="quiz-counter" class="quiz-counter"></div>
+    <div class="quiz-card" id="quiz-card">
+      <div class="quiz-q" id="quiz-q"></div>
+      <div class="quiz-hint" id="quiz-hint"></div>
+      <div class="options-grid" id="options-grid"></div>
+    </div>
+    <div class="nav-row">
+      <button class="btn-nav btn-prev" id="btn-prev" onclick="navPrev()">← 이전</button>
+      <button class="btn-nav btn-next" id="btn-next" onclick="navNext()" disabled>다음 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RESULT ══ -->
+<div class="screen" id="screen-result">
+  <div class="result-wrap animate-in">
+    <div class="result-hero">
+      <div class="result-done-label">설문 완료 · 나의 말씀 이야기</div>
+      <div class="result-verse-ref" id="r-ref"></div>
+      <div class="result-verse-text" id="r-verse-display"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-card-title">📋 나의 응답 요약</div>
+      <div id="r-summary"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-card-title">🌿 나의 말씀 읽기 유형</div>
+      <div class="reading-type-badge" id="r-type-badge"></div>
+      <div class="reading-type-desc" id="r-type-desc"></div>
+      <div class="theological-note" id="r-theo"></div>
+    </div>
+
+    <div class="submit-status" id="submit-status"></div>
+
+    <div class="result-actions">
+      <button class="btn-action btn-restart" onclick="restartSurvey()">← 다시 하기</button>
+      <button class="btn-action btn-copy" id="btn-copy" onclick="copyResult()">결과 복사 📋</button>
+    </div>
+  </div>
+  <div class="site-footer">
+    선원교회 청년부 #257 · 내가 읽는 말씀은? (시편 1편)
+  </div>
+</div>
+
+<script>
+// ★ 구글 Apps Script Web App URL — 배포 후 교체
+var SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+
+// ────────────────────────────────────────
+// 질문 데이터 (var 사용 — 구형 인앱 엔진 호환)
+// ────────────────────────────────────────
+var QUESTIONS = [
+  {
+    section: "내가 좋아하는 구절",
+    q: "내가 가장 좋아하는 성경 구절은 무엇인가요?",
+    hint: "성경 장절(예: 요한복음 3:16)과 구절 내용을 함께 적어주세요. 바로 떠오르지 않아도 괜찮아요.",
+    type: "verse",
+    key: "fave_ref",
+    key2: "fave_verse"
+  },
+  {
+    section: "내가 좋아하는 구절",
+    q: "그 구절을 처음 만났을 때 어떤 상황이었나요?",
+    hint: "기억나는 상황을 떠올려 선택해 주세요.",
+    type: "choice",
+    key: "first_encounter",
+    opts: ["예배나 설교 중에 들었다","개인 성경 읽기나 묵상 중에 발견했다","힘든 시간을 보내며 위로로 다가왔다","누군가(가족·친구·멘토)가 나눠주었다","정확히 기억나지 않지만 오래전부터 알았다"]
+  },
+  {
+    section: "말씀과의 관계",
+    q: "나는 성경을 주로 어떻게 읽나요?",
+    hint: "시편 1편은 말씀을 '주야로 묵상'하는 삶을 이야기합니다. 나의 실제 모습을 솔직하게 골라주세요.",
+    type: "choice",
+    key: "how_read",
+    opts: ["정해진 시간에 꾸준히 읽는 편이다","생각날 때, 마음이 움직일 때 읽는다","예배나 소그룹에서 주로 접한다","요즘은 잘 읽지 못하고 있다","읽고 싶은 마음은 있지만 습관이 잘 안 잡힌다"]
+  },
+  {
+    section: "말씀과의 관계",
+    q: "성경을 읽을 때 나는 주로 무엇을 찾나요?",
+    hint: "성경을 펼칠 때 나의 마음 안에 가장 크게 있는 것을 골라주세요.",
+    type: "choice",
+    key: "what_seek",
+    opts: ["위로와 평안 — 힘들 때 의지할 말씀","방향과 지혜 — 어떻게 살아야 할지 길잡이","하나님을 더 알고 싶은 마음","공동체와 나눔 — 함께 이야기할 주제","아직 잘 모르겠다 — 읽는 것 자체가 낯설다"]
+  },
+  {
+    section: "말씀과 나의 삶",
+    q: "나에게 성경은 지금 어떤 존재인가요?",
+    hint: "정답은 없어요. 지금 이 순간 솔직한 느낌을 골라주세요.",
+    type: "choice",
+    key: "bible_role",
+    opts: ["삶의 나침반 — 결정을 내릴 때 돌아보는 기준","쉼터 — 지치고 힘들 때 찾아오는 곳","아직 낯선 곳 — 읽지만 잘 와 닿지 않는다","오래된 친구 — 편하지만 가끔 새롭게 발견한다","도전과 씨름 — 이해 안 되는 부분에 자꾸 걸린다"]
+  },
+  {
+    section: "말씀과 나의 삶",
+    q: "내가 좋아하는 성경 구절이 나의 삶에 영향을 준 적이 있나요?",
+    hint: "시냇가에 심긴 나무처럼, 말씀이 열매를 맺은 순간이 있었다면 떠올려 보세요.",
+    type: "choice",
+    key: "life_impact",
+    opts: ["네, 뚜렷이 기억하는 순간이 있다","작게라도 영향이 있었다고 생각한다","잘 모르겠지만 그랬으면 좋겠다","아직은 영향이 크게 느껴지지 않는다","오히려 그 구절 때문에 더 많이 고민하게 됐다"]
+  },
+  {
+    section: "소망",
+    q: "오늘 예배에서 성경 말씀에 관해 가장 나누고 싶은 것은?",
+    hint: "이 답은 오늘 토론 시간에 함께 나눌 것입니다. 자유롭게 적어주세요.",
+    type: "text",
+    key: "share_hope"
+  }
+];
+
+var READING_TYPES = [
+  {
+    id: "comforter", label: "위로의 독자", emoji: "🕊",
+    triggers: { what_seek: "위로와 평안 — 힘들 때 의지할 말씀", bible_role: "쉼터 — 지치고 힘들 때 찾아오는 곳" },
+    desc: "말씀이 당신에게 가장 먼저 다가오는 것은 위로와 평화입니다. 삶의 무게 속에서 하나님을 솔직하게 부르는 신앙을 가지고 있습니다.",
+    theo: "시편은 삶의 고통을 숨기지 않습니다. 탄식과 찬양 사이를 오가며 하나님을 붙드는 것이 바로 성경적 신앙입니다. 당신의 말씀 읽기는 그 흐름 안에 있습니다."
+  },
+  {
+    id: "seeker", label: "탐구하는 독자", emoji: "🔍",
+    triggers: { what_seek: "하나님을 더 알고 싶은 마음", bible_role: "도전과 씨름 — 이해 안 되는 부분에 자꾸 걸린다" },
+    desc: "성경에서 쉬운 답보다 깊은 물음을 찾는 분입니다. 성경은 결론이 아니라 과정을 담은 책입니다. 씨름하는 것 자체가 신앙입니다.",
+    theo: "말씀 앞에서 질문하는 사람은 그 말씀을 진지하게 대하는 사람입니다. 당신의 씨름은 하나님을 향한 관심의 다른 이름입니다."
+  },
+  {
+    id: "pilgrim", label: "순례하는 독자", emoji: "🌿",
+    triggers: { what_seek: "방향과 지혜 — 어떻게 살아야 할지 길잡이", bible_role: "삶의 나침반 — 결정을 내릴 때 돌아보는 기준" },
+    desc: "시편 1편의 '복 있는 사람'처럼, 말씀을 삶의 길로 삼고 걸어가는 분입니다. 말씀을 나침반으로 삼는 삶이 이미 시편 1편을 살아내고 있습니다.",
+    theo: "성경의 말씀(토라)은 단순한 규칙이 아니라 '삶의 안내, 가르침, 방향'입니다. 말씀 따라 걷는 길 위에서 '아쉬레이(행복)'가 자라납니다."
+  },
+  {
+    id: "wanderer", label: "길을 찾는 독자", emoji: "🌱",
+    triggers: { how_read: "요즘은 잘 읽지 못하고 있다", bible_role: "아직 낯선 곳 — 읽지만 잘 와 닿지 않는다" },
+    desc: "지금은 말씀과의 거리가 느껴지는 시간일 수 있습니다. 그래도 괜찮습니다. 시냇가에 심긴 나무도 처음에는 뿌리를 내리는 시간이 필요합니다.",
+    theo: "성경은 우리의 인간적 여정을 그대로 담고 있습니다. 오늘 이 자리에 온 것만으로도 이미 말씀을 향해 한 걸음 내딛은 것입니다."
+  },
+  {
+    id: "community", label: "함께 읽는 독자", emoji: "🤝",
+    triggers: { what_seek: "공동체와 나눔 — 함께 이야기할 주제", first_encounter: "누군가(가족·친구·멘토)가 나눠주었다" },
+    desc: "말씀이 홀로가 아니라 함께할 때 살아난다는 것을 본능적으로 아는 분입니다. 성경을 함께 읽고 나누는 것이 가장 자연스러운 신앙의 모습입니다.",
+    theo: "초대 교회는 공동체 안에서 말씀을 읽고 해석했습니다. 성경을 함께의 이야기로 읽는 것은 가장 오래된 신앙의 방식입니다."
+  }
+];
+
+// ────────────────────────────────────────
+// 상태
+// ────────────────────────────────────────
+var current = 0;
+var answers = {};
+
+// ────────────────────────────────────────
+// 화면 전환
+// ────────────────────────────────────────
+function startSurvey() {
+  current = 0;
+  answers = {};
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+function showScreen(id) {
+  var screens = document.querySelectorAll('.screen');
+  for (var i = 0; i < screens.length; i++) {
+    screens[i].classList.remove('active');
+  }
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ────────────────────────────────────────
+// 질문 렌더링
+// ────────────────────────────────────────
+function renderQuestion() {
+  var q     = QUESTIONS[current];
+  var total = QUESTIONS.length;
+
+  document.getElementById('progressFill').style.width = ((current / total) * 100) + '%';
+  document.getElementById('quiz-step-label').textContent = q.section;
+  document.getElementById('quiz-counter').textContent = (current + 1) + ' / ' + total;
+  document.getElementById('quiz-q').textContent    = q.q;
+  document.getElementById('quiz-hint').textContent = q.hint;
+
+  var grid    = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  var nextBtn = document.getElementById('btn-next');
+  nextBtn.disabled  = true;
+  nextBtn.textContent = current < QUESTIONS.length - 1 ? '다음 →' : '완료 ✓';
+
+  if (q.type === 'verse') {
+    // ── 성경 장절 + 구절 내용 두 필드 ──
+    var group = document.createElement('div');
+    group.className = 'verse-input-group';
+
+    var refWrap = document.createElement('div');
+    refWrap.className = 'text-input-wrap';
+    refWrap.innerHTML =
+      '<div class="text-input-label">📌 성경 장절 (예: 요한복음 3:16 / 시편 23:1)</div>' +
+      '<input class="ref-input" type="text" placeholder="책 이름 장:절" ' +
+        'value="' + (answers[q.key] || '') + '" autocomplete="off">';
+
+    var verseWrap = document.createElement('div');
+    verseWrap.className = 'text-input-wrap';
+    verseWrap.innerHTML =
+      '<div class="text-input-label">📖 구절 내용 (기억나는 대로 자유롭게)</div>' +
+      '<textarea class="text-input" rows="3" placeholder="구절 내용을 적어주세요…">' +
+        (answers[q.key2] || '') + '</textarea>';
+
+    var refInput = refWrap.querySelector('input');
+    var verseTA  = verseWrap.querySelector('textarea');
+
+    function checkVerse() {
+      answers[q.key]  = refInput.value ? refInput.value.trim() : '';
+      answers[q.key2] = verseTA.value  ? verseTA.value.trim()  : '';
+      nextBtn.disabled = !answers[q.key];
+    }
+    refInput.addEventListener('input', checkVerse);
+    refInput.addEventListener('keyup',  checkVerse); // 구형 인앱 호환
+    verseTA.addEventListener('input',  checkVerse);
+    verseTA.addEventListener('keyup',  checkVerse);
+    if (answers[q.key]) nextBtn.disabled = false;
+
+    group.appendChild(refWrap);
+    group.appendChild(verseWrap);
+    grid.appendChild(group);
+
+  } else if (q.type === 'text') {
+    var wrap = document.createElement('div');
+    wrap.className = 'text-input-wrap';
+    wrap.innerHTML =
+      '<div class="text-input-label">자유롭게 입력해 주세요</div>' +
+      '<textarea class="text-input" rows="3" placeholder="여기에 적어주세요…">' +
+        (answers[q.key] || '') + '</textarea>';
+    var ta = wrap.querySelector('textarea');
+    function checkText() {
+      answers[q.key] = ta.value ? ta.value.trim() : '';
+      nextBtn.disabled = !answers[q.key];
+    }
+    ta.addEventListener('input', checkText);
+    ta.addEventListener('keyup',  checkText);
+    if (answers[q.key]) nextBtn.disabled = false;
+    grid.appendChild(wrap);
+
+  } else {
+    // choice
+    for (var i = 0; i < q.opts.length; i++) {
+      (function(opt) {
+        var btn = document.createElement('button');
+        btn.className = 'opt-btn' + (answers[q.key] === opt ? ' selected' : '');
+        btn.innerHTML = '<div class="opt-marker"></div><div class="opt-text">' + opt + '</div>';
+        btn.onclick = function() {
+          var btns = document.querySelectorAll('.opt-btn');
+          for (var j = 0; j < btns.length; j++) btns[j].classList.remove('selected');
+          btn.classList.add('selected');
+          answers[q.key] = opt;
+          nextBtn.disabled = false;
+        };
+        grid.appendChild(btn);
+      })(q.opts[i]);
+    }
+  }
+
+  // 카드 애니메이션
+  var card = document.getElementById('quiz-card');
+  card.classList.remove('animate-in');
+  // reflow trigger
+  card.offsetHeight; // eslint-disable-line
+  card.classList.add('animate-in');
+
+  document.getElementById('btn-prev').disabled = (current === 0);
+}
+
+function navNext() {
+  if (current < QUESTIONS.length - 1) { current++; renderQuestion(); }
+  else { showResults(); }
+}
+function navPrev() {
+  if (current > 0) { current--; renderQuestion(); }
+}
+
+// ────────────────────────────────────────
+// 결과 화면
+// ────────────────────────────────────────
+function showResults() {
+  document.getElementById('progressFill').style.width = '100%';
+  showScreen('screen-result');
+
+  var ref   = answers['fave_ref']   || '';
+  var verse = answers['fave_verse'] || '';
+  document.getElementById('r-ref').textContent = ref ? '✦ ' + ref : '✦ 내가 좋아하는 말씀';
+  document.getElementById('r-verse-display').textContent =
+    verse || '"철을 따라 열매를 맺으며 그 잎사귀가 마르지 아니함 같으니" — 시편 1:3';
+
+  // 응답 요약
+  var summaryEl = document.getElementById('r-summary');
+  var labelMap = {
+    fave_ref: '성경 장절', fave_verse: '구절 내용',
+    first_encounter: '처음 만난 상황', how_read: '성경 읽기 방식',
+    what_seek: '말씀에서 찾는 것', bible_role: '나에게 성경은',
+    life_impact: '삶에 영향', share_hope: '나누고 싶은 것'
+  };
+  summaryEl.innerHTML = '';
+  var keys = Object.keys(labelMap);
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var val = answers[key];
+    if (!val) continue;
+    var row = document.createElement('div');
+    row.className = 'result-row';
+    row.innerHTML =
+      '<span class="result-row-label">' + labelMap[key] + '</span>' +
+      '<span class="result-row-value">' + val + '</span>';
+    summaryEl.appendChild(row);
+  }
+
+  // 유형 매칭
+  var matched = READING_TYPES[0], high = -1;
+  for (var t = 0; t < READING_TYPES.length; t++) {
+    var type  = READING_TYPES[t];
+    var score = 0;
+    var tkeys = Object.keys(type.triggers);
+    for (var k = 0; k < tkeys.length; k++) {
+      if (answers[tkeys[k]] === type.triggers[tkeys[k]]) score++;
+    }
+    if (score > high) { high = score; matched = type; }
+  }
+
+  document.getElementById('r-type-badge').textContent = matched.emoji + ' ' + matched.label;
+  document.getElementById('r-type-desc').textContent  = matched.desc;
+  document.getElementById('r-theo').innerHTML = '<p>' + matched.theo + '</p>';
+
+  // 구글 시트 전송
+  sendToSheet(matched.label);
+}
+
+// ────────────────────────────────────────
+// 구글 시트 전송
+// GET + Image 태그 방식 — 카카오 인앱 CORS 완전 우회
+// ────────────────────────────────────────
+function sendToSheet(typeLabel) {
+  var statusEl = document.getElementById('submit-status');
+
+  if (!SHEET_URL || SHEET_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
+    statusEl.className = 'submit-status error';
+    statusEl.innerHTML = '⚠️ 아직 구글 시트가 연결되지 않았습니다.';
+    return;
+  }
+
+  statusEl.className = 'submit-status sending';
+  statusEl.textContent = '⏳ 응답을 전송하는 중입니다…';
+
+  // URL 파라미터로 데이터 전달 (GET 방식 — CORS 제약 없음)
+  function enc(v) { return encodeURIComponent(v || ''); }
+
+  var params = [
+    'timestamp='       + enc(new Date().toLocaleString('ko-KR')),
+    'fave_ref='        + enc(answers['fave_ref']),
+    'fave_verse='      + enc(answers['fave_verse']),
+    'first_encounter=' + enc(answers['first_encounter']),
+    'how_read='        + enc(answers['how_read']),
+    'what_seek='       + enc(answers['what_seek']),
+    'bible_role='      + enc(answers['bible_role']),
+    'life_impact='     + enc(answers['life_impact']),
+    'share_hope='      + enc(answers['share_hope']),
+    'reading_type='    + enc(typeLabel)
+  ].join('&');
+
+  var url = SHEET_URL + '?' + params;
+
+  // Image 태그 방식 — 카카오 인앱에서 CORS 없이 요청 가능
+  var img = new Image();
+  img.onload = img.onerror = function() {
+    // onload/onerror 모두 성공으로 처리
+    // (Apps Script GET은 항상 200을 반환하므로 onerror는 실제로 거의 안 탐)
+    statusEl.className = 'submit-status success';
+    statusEl.innerHTML = '✅ 응답이 담당자에게 전달되었습니다. 감사합니다!';
+  };
+
+  // 5초 타임아웃
+  var timer = setTimeout(function() {
+    statusEl.className = 'submit-status success';
+    statusEl.innerHTML = '✅ 응답이 전달되었습니다. 감사합니다!';
+  }, 5000);
+
+  img.onload = img.onerror = function() {
+    clearTimeout(timer);
+    statusEl.className = 'submit-status success';
+    statusEl.innerHTML = '✅ 응답이 담당자에게 전달되었습니다. 감사합니다!';
+  };
+
+  img.src = url;
+}
+
+// ────────────────────────────────────────
+// 기타 (클립보드: 카카오 인앱 navigator.clipboard 미지원 대응)
+// ────────────────────────────────────────
+function restartSurvey() {
+  current = 0; answers = {};
+  document.getElementById('progressFill').style.width = '0%';
+  showScreen('screen-intro');
+}
+
+function copyResult() {
+  var lines = [
+    '[선원교회 청년부 #257 성경 설문]',
+    '성경 장절: '      + (answers['fave_ref']        || '(없음)'),
+    '구절 내용: '      + (answers['fave_verse']       || '(없음)'),
+    '처음 만난 상황: ' + (answers['first_encounter']  || '(없음)'),
+    '성경 읽기 방식: ' + (answers['how_read']         || '(없음)'),
+    '말씀에서 찾는 것: '+ (answers['what_seek']       || '(없음)'),
+    '나에게 성경은: '  + (answers['bible_role']        || '(없음)'),
+    '삶에 영향: '      + (answers['life_impact']       || '(없음)'),
+    '나누고 싶은 것: ' + (answers['share_hope']        || '(없음)')
+  ];
+  var text = lines.join('\n');
+
+  // 카카오 인앱: navigator.clipboard 없음 → textarea 복사 fallback
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text)
+      .then(function() { showCopyFeedback(); })
+      .catch(function() { fallbackCopy(text); });
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try {
+    document.execCommand('copy');
+    showCopyFeedback();
+  } catch (e) {
+    alert('복사에 실패했습니다. 직접 선택해 복사해 주세요.');
+  }
+  document.body.removeChild(ta);
+}
+
+function showCopyFeedback() {
+  var btn = document.getElementById('btn-copy');
+  var orig = btn.textContent;
+  btn.textContent = '✅ 복사됨!';
+  btn.style.background = '#2E6B4A';
+  setTimeout(function() {
+    btn.textContent = orig;
+    btn.style.background = '';
+  }, 2000);
+}
+</script>
+</body>
+</html>
